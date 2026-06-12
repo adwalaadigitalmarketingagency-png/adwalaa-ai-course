@@ -1,0 +1,25 @@
+{
+  "name": "adwalaa-hostinger-express-app",
+  "version": "1.4.0",
+  "private": true,
+  "description": "ADWALAA Express.js app for Hostinger Node.js Web App hosting",
+  "main": "app.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node app.js",
+    "build": "node -e \"console.log(\\\"Build complete\\\")\""
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "nodemailer": "^6.9.14"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "express",
+    "hostinger",
+    "nodejs"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "contacts": [],
+  "audits": [],
+  "clients": [],
+  "content": {
+    "acceptingClients": true,
+    "announcementActive": false,
+    "announcementText": "Free business audit available for local businesses.",
+    "faqs": [
+      {
+        "question": "What digital services does ADWALAA provide?",
+        "answer": "ADWALAA provides website design, Google Business Profile support, local SEO, social media management, Facebook and Instagram advertising, lead generation support, review guidance, WhatsApp Business support and practical AI automation for local businesses."
+      },
+      {
+        "question": "Is the Free Business Audit really free?",
+        "answer": "Yes. The initial business audit is free. It is used to understand your current digital presence, identify important gaps and suggest practical next steps. Paid work starts only after the scope and charges are discussed clearly."
+      },
+      {
+        "question": "Does ADWALAA work only in Lakhimpur Kheri?",
+        "answer": "ADWALAA is based in Lakhimpur Kheri, Uttar Pradesh, and can support eligible businesses in other Indian districts through online communication and remote digital service delivery."
+      },
+      {
+        "question": "Which types of businesses can use these services?",
+        "answer": "The services are suitable for photographers and studios, shops, restaurants and cafes, coaching institutes, YouTube creators, clinics, consultants, service providers, startups and other small local businesses."
+      },
+      {
+        "question": "How much do digital services cost?",
+        "answer": "The cost depends on the selected service, current business position, required features and project scope. A clear quotation is shared after understanding the actual requirement. No price should be assumed before the scope is confirmed."
+      },
+      {
+        "question": "Can ADWALAA guarantee Google ranking, leads or sales?",
+        "answer": "No responsible agency can honestly guarantee a fixed ranking, number of leads or sales. ADWALAA focuses on professional setup, practical strategy, accurate implementation and continuous improvement based on available data."
+      },
+      {
+        "question": "What information is needed to start a project?",
+        "answer": "Usually the basic business name, contact details, location, services, target customers, existing website or Google Business Profile link, brand assets and the main business goal are required. Only relevant information is requested."
+      },
+      {
+        "question": "How can I start or contact ADWALAA?",
+        "answer": "You can select your district, submit the Free Business Audit form or use the WhatsApp button. Share your business requirement clearly, and the next suitable step can then be discussed."
+      }
+    ]
+  }
+}

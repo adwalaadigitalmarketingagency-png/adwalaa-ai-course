@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /admin-login.html
+Disallow: /admin.html
+Allow: /
+Sitemap: https://adwalaa.com/sitemap.xml

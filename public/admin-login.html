@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin Login | ADWALAA</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="assets/images/logo/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/admin.css?v=2">
+</head>
+<body data-page="login">
+
+<div class="login-page">
+  <div class="login-box">
+    <div class="login-logo">
+      <img src="assets/images/logo/adwalaa-logo-header.png" alt="ADWALAA" decoding="async" loading="eager">
+      <span class="login-logo-badge">Admin</span>
+    </div>
+    <h1>Welcome back</h1>
+    <p>Sign in to access the ADWALAA admin CRM panel.</p>
+
+    <div class="login-security-warning">This login now works with the local backend. For live deployment, use stronger production security and secure hosting.</div>
+
+    <form id="loginForm" autocomplete="off">
+      <div class="login-field">
+        <label for="loginUser">Username</label>
+        <input type="text" id="loginUser" name="username" placeholder="Enter username" autocomplete="off" required>
+      </div>
+      <div class="login-field">
+        <label for="loginPass">Password</label>
+        <input type="password" id="loginPass" name="password" placeholder="Enter password" autocomplete="off" required>
+      </div>
+      <button class="login-btn" type="submit">
+        <svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round" aria-hidden="true">
+          <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/>
+        </svg>
+        Sign In
+      </button>
+      <div class="login-error" id="loginError"></div>
+    </form>
+
+    <p class="login-hint">Local backend connected · Upgrade security before live deployment.</p>
+  </div>
+</div>
+
+<script src="assets/js/admin.js"></script>
+</body>
+</html>

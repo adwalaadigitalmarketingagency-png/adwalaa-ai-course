@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin Panel | ADWALAA</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="assets/images/logo/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/admin.css?v=2">
+  </head>
+<body data-page="admin">
+
+<!-- SIDEBAR OVERLAY -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<div class="admin-security-note"><strong>Safety note:</strong> This admin panel now uses a local backend and server-side storage for practical local use. Use proper production security before going live.</div>
+
+<div class="admin-layout">
+
+  <!-- ─── SIDEBAR ─────────────────────────────────────────── -->
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="sidebar-header">
+      <img src="assets/images/logo/adwalaa-logo-header.png" alt="ADWALAA" decoding="async" loading="eager">
+      <span class="sidebar-badge">Admin</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-group-label">Main</div>
+
+      <button class="nav-item active" data-panel="dashboard">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        Dashboard
+        <span class="nav-badge" id="badge-dash" style="display:none">0</span>
+      </button>
+
+      <div class="nav-group-label" style="margin-top:8px">Leads</div>
+
+      <button class="nav-item" data-panel="contacts">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4Z"/><path d="M8 10h8M8 14h5"/></svg>
+        Contact Submissions
+        <span class="nav-badge" id="badge-contacts" style="display:none">0</span>
+      </button>
+
+      <button class="nav-item" data-panel="audits">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="m9 12 2 2 4-4"/></svg>
+        Audit Requests
+        <span class="nav-badge" id="badge-audits" style="display:none">0</span>
+      </button>
+
+      <div class="nav-group-label" style="margin-top:8px">Management</div>
+
+      <button class="nav-item" data-panel="clients">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Clients List
+      </button>
+
+      <button class="nav-item" data-panel="content">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+        Content Manager
+      </button>
+
+      <div class="nav-group-label" style="margin-top:8px">Website</div>
+
+      <a class="nav-item" href="index.html" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        View Website
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="sidebar-user-avatar">AD</div>
+        <div class="sidebar-user-info">
+          <strong>Admin</strong>
+          <small>ADWALAA Panel</small>
+        </div>
+        <button class="logout-btn" id="logoutBtn" title="Logout">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ─── MAIN ──────────────────────────────────────────────── -->
+  <div class="admin-main">
+
+    <!-- Topbar -->
+    <header class="admin-topbar">
+      <button class="topbar-menu-btn" id="topbarMenuBtn" aria-label="Open sidebar">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <span class="topbar-title" id="topbarTitle">Dashboard</span>
+      <div class="topbar-dot"></div>
+      <span class="topbar-time" id="topbarTime"></span>
+    </header>
+
+    <!-- Content -->
+    <div class="admin-content">
+
+      <!-- ══════════════════════════════════════════════════════
+           PANEL: DASHBOARD
+      ══════════════════════════════════════════════════════ -->
+      <div class="admin-panel active" id="panel-dashboard">
+        <div class="page-header">
+          <div class="page-header-copy">
+            <h2>Dashboard</h2>
+            <p>Overview of all leads, clients and website activity.</p>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card" style="--stat-color:#ef4444;--stat-bg:rgba(239,68,68,0.12)">
+            <div class="stat-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4Z"/></svg>
+            </div>
+            <div class="stat-value" id="stat-contacts">0</div>
+            <div class="stat-label">New Contacts</div>
+          </div>
+          <div class="stat-card" style="--stat-color:#f59e0b;--stat-bg:rgba(245,158,11,0.12)">
+            <div class="stat-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg>
+            </div>
+            <div class="stat-value" id="stat-audits">0</div>
+            <div class="stat-label">New Audit Requests</div>
+          </div>
+          <div class="stat-card" style="--stat-color:#10b981;--stat-bg:rgba(16,185,129,0.12)">
+            <div class="stat-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            </div>
+            <div class="stat-value" id="stat-clients">0</div>
+            <div class="stat-label">Active Clients</div>
+          </div>
+          <div class="stat-card" style="--stat-color:#4f8ef7;--stat-bg:rgba(79,142,247,0.15)">
+            <div class="stat-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
+            </div>
+            <div class="stat-value" id="stat-total-leads">0</div>
+            <div class="stat-label">Total Leads</div>
+          </div>
+        </div>
+
+        <div class="dash-grid">
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <h3>Recent Activity</h3>
+              <button class="btn-action" onclick="adminApp.closeModal && location.reload()">Refresh</button>
+            </div>
+            <div class="admin-card-body">
+              <div class="activity-feed" id="activityFeed">
+                <div class="empty-state">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4Z"/></svg>
+                  <p>No activity yet.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <div class="admin-card-header"><h3>Quick Actions</h3></div>
+            <div class="admin-card-body" style="display:flex;flex-direction:column;gap:10px">
+              <button class="btn-action primary" style="justify-content:center;padding:12px" onclick="window.adminApp && document.querySelector('[data-panel=contacts]').click()">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4Z"/></svg>
+                View Contact Submissions
+              </button>
+              <button class="btn-action" style="justify-content:center;padding:12px" onclick="document.querySelector('[data-panel=audits]').click()">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg>
+                View Audit Requests
+              </button>
+              <button class="btn-action" style="justify-content:center;padding:12px" onclick="document.querySelector('[data-panel=clients]').click()">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                Manage Clients
+              </button>
+              <button class="btn-action" style="justify-content:center;padding:12px" onclick="document.querySelector('[data-panel=content]').click()">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+                Edit Content / FAQs
+              </button>
+              <a class="btn-action" href="index.html" target="_blank" style="justify-content:center;padding:12px">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Open Website
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════
+           PANEL: CONTACTS
+      ══════════════════════════════════════════════════════ -->
+      <div class="admin-panel" id="panel-contacts">
+        <div class="page-header">
+          <div class="page-header-copy">
+            <h2>Contact Submissions</h2>
+            <p>All enquiries submitted through the Contact page. <strong id="contactsCount"></strong></p>
+          </div>
+          <div class="btn-group">
+            <button class="btn-action" id="importContactsBtn">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+              Import CSV
+            </button>
+            <input type="file" id="importContactsFile" accept=".csv" style="display:none">
+            <button class="btn-action primary" id="exportContacts">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+              Export CSV
+            </button>
+          </div>
+        </div>
+
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <div class="table-toolbar">
+              <input type="search" class="search-input" id="contactSearch" placeholder="Search by name, phone, business…">
+              <select class="filter-select" id="contactFilter">
+                <option value="all">All Status</option>
+                <option value="new">New</option>
+                <option value="read">Read</option>
+                <option value="replied">Replied</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name / Phone</th>
+                  <th>Business</th>
+                  <th>Service</th>
+                  <th>Location</th>
+                  <th>Status</th>
+                  <th>Received</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="contactsTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════
+           PANEL: AUDITS
+      ══════════════════════════════════════════════════════ -->
+      <div class="admin-panel" id="panel-audits">
+        <div class="page-header">
+          <div class="page-header-copy">
+            <h2>Free Audit Requests</h2>
+            <p>All audit requests from the Free Audit page. <strong id="auditsCount"></strong></p>
+          </div>
+          <div class="btn-group">
+            <button class="btn-action" id="importAuditsBtn">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+              Import CSV
+            </button>
+            <input type="file" id="importAuditsFile" accept=".csv" style="display:none">
+            <button class="btn-action primary" id="exportAudits">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+              Export CSV
+            </button>
+          </div>
+        </div>
+
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <div class="table-toolbar">
+              <input type="search" class="search-input" id="auditSearch" placeholder="Search by name, business…">
+              <select class="filter-select" id="auditFilter">
+                <option value="all">All Status</option>
+                <option value="new">New</option>
+                <option value="read">Read</option>
+                <option value="in-progress">In Progress</option>
+                <option value="done">Done</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name / Email</th>
+                  <th>Business</th>
+                  <th>Phone</th>
+                  <th>Location</th>
+                  <th>Status</th>
+                  <th>Received</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="auditsTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════
+           PANEL: CLIENTS
+      ══════════════════════════════════════════════════════ -->
+      <div class="admin-panel" id="panel-clients">
+        <div class="page-header">
+          <div class="page-header-copy">
+            <h2>Clients List</h2>
+            <p>Manage your clients, track status and add notes. <strong id="clientsCount"></strong></p>
+          </div>
+          <div class="btn-group">
+            <button class="btn-action" id="importClientsBtn">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+              Import CSV
+            </button>
+            <input type="file" id="importClientsFile" accept=".csv" style="display:none">
+            <button class="btn-action" id="exportClientsBtn">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+              Export CSV
+            </button>
+            <button class="btn-action primary" id="addClientBtn">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+              Add Client
+            </button>
+          </div>
+        </div>
+
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <div class="table-toolbar">
+              <input type="search" class="search-input" id="clientSearch" placeholder="Search by name, business, service…">
+              <select class="filter-select" id="clientFilter">
+                <option value="all">All Status</option>
+                <option value="active">Active</option>
+                <option value="on-hold">On Hold</option>
+                <option value="closed">Closed</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name / Phone</th>
+                  <th>Business</th>
+                  <th>Service</th>
+                  <th>Start Date</th>
+                  <th>Status</th>
+                  <th>Notes</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="clientsTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════
+           PANEL: CONTENT MANAGER
+      ══════════════════════════════════════════════════════ -->
+      <div class="admin-panel" id="panel-content">
+        <div class="page-header">
+          <div class="page-header-copy">
+            <h2>Content Manager</h2>
+            <p>Edit website settings, announcement banner and FAQ items.</p>
+          </div>
+          <div class="btn-group">
+            <button class="btn-action primary" id="saveContentBtn">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              Save All Changes
+            </button>
+          </div>
+        </div>
+
+        <div style="display:grid;gap:20px">
+
+          <!-- Settings Card -->
+          <div class="admin-card">
+            <div class="admin-card-header"><h3>Website Settings</h3></div>
+            <div class="admin-card-body">
+              <div class="toggle-row">
+                <div>
+                  <div class="toggle-label">Accepting New Clients</div>
+                  <div class="toggle-desc">When OFF, clients will see "not accepting new projects" note.</div>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="toggleAccepting" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+              <div class="toggle-row">
+                <div>
+                  <div class="toggle-label">Show Announcement Banner</div>
+                  <div class="toggle-desc">Displays a notice banner on the homepage.</div>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="toggleAnnouncement">
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+              <div style="margin-top:20px">
+                <div class="admin-form-group">
+                  <label>Announcement Text</label>
+                  <input type="text" id="announcementText" placeholder="Enter announcement message…">
+                </div>
+                <div class="banner-preview" id="announcementPreview">Preview will appear here…</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ Editor Card -->
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <h3>FAQ Editor</h3>
+              <button class="btn-action" id="addFaqBtn">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                Add FAQ
+              </button>
+            </div>
+            <div class="admin-card-body">
+              <p style="color:var(--text-muted);font-size:.85rem;margin-bottom:16px">Edit FAQ questions and answers. Click "Save All Changes" when done.</p>
+              <div id="faqEditorList"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div><!-- /admin-content -->
+  </div><!-- /admin-main -->
+</div><!-- /admin-layout -->
+
+<!-- ─── TOAST CONTAINER ──────────────────────────────────── -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- ─── MODAL: IMPORT PREVIEW ──────────────────────────────── -->
+<div class="modal-overlay" id="importModal">
+  <div class="modal" style="max-width:680px">
+    <div class="modal-header">
+      <h3 id="importModalTitle">Import CSV Preview</h3>
+      <button class="modal-close"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div id="importStats" style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px"></div>
+      <div style="background:rgba(79,142,247,0.07);border:1px solid rgba(79,142,247,0.2);border-radius:8px;padding:12px 16px;font-size:.83rem;color:var(--accent);margin-bottom:16px">
+        <strong>ℹ️ Duplicate Check:</strong> Records with the same phone number already in the system will be skipped automatically.
+      </div>
+      <div class="table-wrap" style="max-height:300px;overflow-y:auto">
+        <table id="importPreviewTable">
+          <thead id="importPreviewHead"></thead>
+          <tbody id="importPreviewBody"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-action modal-close">Cancel</button>
+      <button class="btn-action primary" id="confirmImportBtn">Import Records</button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── MODAL: VIEW CONTACT/AUDIT ────────────────────────── -->
+<div class="modal-overlay" id="viewModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="viewModalTitle">Submission Details</h3>
+      <button class="modal-close"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body" id="viewModalBody"></div>
+    <div class="modal-footer">
+      <a class="btn-action success" id="viewModalWABtn" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4Z"/></svg>
+        WhatsApp Reply
+      </a>
+      <button class="btn-action primary" id="viewModalSaveBtn">Save Notes</button>
+      <button class="btn-action modal-close">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── MODAL: ADD/EDIT CLIENT ───────────────────────────── -->
+<div class="modal-overlay" id="clientModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="clientModalTitle">Add New Client</h3>
+      <button class="modal-close"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row-2">
+        <div class="admin-form-group">
+          <label>Full Name *</label>
+          <input type="text" id="clientName" placeholder="Client name">
+        </div>
+        <div class="admin-form-group">
+          <label>Business Name</label>
+          <input type="text" id="clientBusiness" placeholder="Business / company">
+        </div>
+      </div>
+      <div class="form-row-2">
+        <div class="admin-form-group">
+          <label>Phone</label>
+          <input type="tel" id="clientPhone" placeholder="+91 XXXXX XXXXX">
+        </div>
+        <div class="admin-form-group">
+          <label>Email</label>
+          <input type="email" id="clientEmail" placeholder="email@example.com">
+        </div>
+      </div>
+      <div class="form-row-2">
+        <div class="admin-form-group">
+          <label>Service</label>
+          <input type="text" id="clientService" placeholder="e.g. Website Design">
+        </div>
+        <div class="admin-form-group">
+          <label>Start Date</label>
+          <input type="date" id="clientStart">
+        </div>
+      </div>
+      <div class="admin-form-group">
+        <label>Status</label>
+        <select id="clientStatus">
+          <option value="active">Active</option>
+          <option value="on-hold">On Hold</option>
+          <option value="closed">Closed</option>
+        </select>
+      </div>
+      <div class="admin-form-group">
+        <label>Notes</label>
+        <textarea id="clientNotes" rows="3" placeholder="Any internal notes about this client…"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-action modal-close">Cancel</button>
+      <button class="btn-action primary" id="saveClientBtn">Save Client</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/admin.js"></script>
+</body>
+</html>
